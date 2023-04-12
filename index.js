@@ -40,7 +40,7 @@ wss.on('connection', function connection(ws) {
 //     console.log('stopping client interval');
 //     clearInterval(id);
 //   });
-});
+// });
 
 server.listen(8080, function () {
   console.log('Listening on http://0.0.0.0:8080');
