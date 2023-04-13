@@ -16,7 +16,7 @@ const wss = new WebSocket.Server({ server });
 wss.on('connection', function connection(ws) {
     ws.on('message', function message(data) {
       console.log('received: %s', data);
-      wss.clients.forEach(function each(client) {
+      ws.clients.forEach(function each(client) {
           client.send(data);
        });
   
