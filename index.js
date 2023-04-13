@@ -12,11 +12,10 @@ app.use(express.static(path.join(__dirname, '/public')));
 const server = createServer(app);
 const wss = new WebSocket.Server({ server });
 
-
 wss.on('connection', function connection(ws) {
     ws.on('message', function message(data) {
       console.log('received: %s', data);
-      ws.clients.forEach(function each(client) {
+      wss.clients.forEach(function each(client) {
           client.send(data);
        });
   
