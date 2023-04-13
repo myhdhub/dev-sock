@@ -11,7 +11,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 const server = createServer(app);
 const wss = new WebSocket.Server({ server });
-    CLIENTS=[];
+var CLIENTS=[];
 wss.on('connection', function connection(ws) {
     CLIENTS.push(ws);
     ws.on('message', function message(data) {
