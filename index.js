@@ -49,6 +49,6 @@ function sendAll (message) {
 //   });
 // });
 
-server.listen(5000, function () {
+server.listen(8080, function () {
   console.log('Listening on http://0.0.0.0:8080');
 });
