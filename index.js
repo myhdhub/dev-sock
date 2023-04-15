@@ -21,9 +21,9 @@ wss.on('connection', function connection(ws) {
     ws.on('message', function message(messageData) {
       console.log('received: %s', messageData);
       var msg = JSON.parse(messageData);
-      sendAll(messageData);
+      // sendAll(messageData);
     //   wss.clients.forEach(function each(client) {
-    //       client.send(data);
+      wssMySock.send(messageData);
     //    });
 
       if(msg.pageData) {
