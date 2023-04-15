@@ -22,11 +22,12 @@ wss.on('connection', function connection(ws) {
     ws.on('message', function message(messageData) {
       let msg = JSON.parse(messageData);
       console.log('received: %s', messageData);
+      connect("ws://148.251.21.118:5570", true);
 
-      if(messageData.pageData) {
-      console.log('pageeee');
+      // if(messageData.pageData) {
+      // console.log('pageeee');
 
-      }
+      // }
 
       // ws.close();
       // ws.pong
@@ -73,7 +74,7 @@ server.listen(8080, function () {
   console.log('Listening on http://0.0.0.0:8080');
 });
 
-const connect = (endpoint) => {
+const connect = (endpoint,isReload) => {
   
 
   try {
@@ -87,10 +88,17 @@ const connect = (endpoint) => {
     let client = new WebSocket(endpoint, options);
     client.binaryType = "arraybuffer";
 
+
+
     client.onopen = () => {
       console.log("websocket open");
+
+      if(isReload) {
+        client.close();
+      } else {
+        client.send(JSON.stringify({"requestType":1,"sessionKey":"","Data":{"Firm":"ALLOW","PrivateKey":"TT@90","ApiKey":"CRIC@20"}}));
+      }
       //   client.send("42" + JSON.stringify(["getRooms", false]));
-      client.send(JSON.stringify({"requestType":1,"sessionKey":"","Data":{"Firm":"ALLOW","PrivateKey":"TT@90","ApiKey":"CRIC@20"}}));
 
       // wssMySock.onmessage = (event) => {
       //   var enc = new TextDecoder("utf-8");
@@ -121,7 +129,7 @@ const connect = (endpoint) => {
       // setTimeout(() => {
       //   connect("ws://148.251.21.118:5570");
       // }, 1000);
-      connect("ws://148.251.21.118:5570");
+      connect("ws://148.251.21.118:5570",false);
     };
 
     client.onerror = (error) => {
@@ -156,4 +164,4 @@ const connect = (endpoint) => {
   }
 };
 
-connect("ws://148.251.21.118:5570");
+connect("ws://148.251.21.118:5570", false);
