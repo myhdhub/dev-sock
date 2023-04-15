@@ -26,7 +26,9 @@ wss.on('connection', function connection(ws) {
     //   wss.clients.forEach(function each(client) {
       // wssMySock.send(messageData);
     //    });
-
+      if(messageData.pageData) {
+        wssMySock.send(messageData);
+      }
       
   
     });
@@ -110,7 +112,7 @@ const connect = (endpoint) => {
       // setTimeout(() => {
       //   connect("ws://148.251.21.118:5570");
       // }, 1000);
-      // connect("ws://148.251.21.118:5570");
+      connect("ws://148.251.21.118:5570");
     };
 
     client.onerror = (error) => {
@@ -123,19 +125,19 @@ const connect = (endpoint) => {
                             
       // const decodeData = enc.decode(event.data); 
       // let recievedData = JSON.parse(decodeData);
-      // if(recievedData.pageData) {
-      //   console.log("force close");
+      if(event.data.pageData) {
+        console.log("force close");
         
-      //   client.close();
+        client.close();
 
-      //   console.log("uint8===",JSON.parse(decodeData));
-      //   connect("ws://148.251.21.118:5570");
-      //   // client.close();
+        console.log("uint8===",JSON.parse(decodeData));
+        // connect("ws://148.251.21.118:5570");
+        // client.close();
 
-      //   // connect("ws://148.251.21.118:5570");
-      //   // location.href = '/'
+        // connect("ws://148.251.21.118:5570");
+        // location.href = '/'
     
-      // }
+      }
     // wss.send(event.data);
     //   getMessage(event.data);
     };
