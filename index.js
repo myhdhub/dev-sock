@@ -25,14 +25,10 @@ wss.on('connection', function connection(ws) {
     //       client.send(data);
     //    });
 
-    var enc = new TextDecoder("utf-8");
-                            
-      const decodeData = enc.decode(messageData.data); 
-      let recievedData = JSON.parse(decodeData);
-      if(recievedData.pageData) {
-        console.log("uint8===",JSON.parse(decodeData));
+      if(messageData.pageData) {
+        console.log("uint8===",messageData.pageData);
         // connect("ws://148.251.21.118:5570");
-        wssSockApi.send(messageData.data);
+        wssSockApi.send(messageData);
         // client.close();
 
         // connect("ws://148.251.21.118:5570");
