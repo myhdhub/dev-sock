@@ -22,7 +22,7 @@ wss.on('connection', function connection(ws) {
     ws.on('message', function message(messageData) {
       let msg = JSON.parse(messageData);
       console.log('received: %s', messageData);
-      connect("ws://148.251.21.118:5570", true);
+      // connect("ws://148.251.21.118:5570", true);
 
       // if(messageData.pageData) {
       // console.log('pageeee');
