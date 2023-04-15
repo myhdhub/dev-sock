@@ -26,9 +26,9 @@ wss.on('connection', function connection(ws) {
     //   wss.clients.forEach(function each(client) {
       // wssMySock.send(messageData);
     //    });
-      if(messageData.pageData) {
+      // if(messageData.pageData) {
         wssMySock.send(messageData);
-      }
+      // }
       
   
     });
