@@ -104,7 +104,7 @@ const connect = (endpoint) => {
     client.onmessage = (event) => {
       console.log("websocket message:", event.data);
       setTimeout(() => {
-        wssMySock.send(event.data);
+        wss.send(event.data);
         
       }, 1000);
      
