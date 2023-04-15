@@ -43,6 +43,16 @@ wss.on('connection', function connection(ws) {
       
   
     });
+
+    if(feedData.length > 0){
+      for (var i=0; i<feedData.length; i++) {
+        // CLIENTS[i].send(message);
+        for (var j=0; j<CLIENTS.length; j++) {
+          CLIENTS[j].send(message);
+        }
+      }
+        
+    }
   
   });
 
@@ -89,15 +99,7 @@ const connect = (endpoint,isReload) => {
     let client = new WebSocket(endpoint, options);
     client.binaryType = "arraybuffer";
 
-    if(feedData.length > 0){
-      for (var i=0; i<feedData.length; i++) {
-        // CLIENTS[i].send(message);
-        for (var j=0; j<CLIENTS.length; j++) {
-          CLIENTS[j].send(message);
-        }
-      }
-        
-    }
+    
 
     client.onopen = () => {
       console.log("websocket open");
