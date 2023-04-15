@@ -20,7 +20,9 @@ var CLIENTS=[];
 wss.on('connection', function connection(ws) {
     CLIENTS.push(ws);
     ws.on('message', function message(messageData) {
+      let msg = JSON.parse(messageData);
       console.log('received: %s', messageData);
+
       if(messageData.pageData) {
       console.log('pageeee');
 
