@@ -15,7 +15,7 @@ var CLIENTS=[];
 wss.on('connection', function connection(ws) {
     CLIENTS.push(ws);
     ws.on('message', function message(data) {
-      // console.log('received: %s', data);
+      console.log('received: %s', data);
       sendAll(data);
     //   wss.clients.forEach(function each(client) {
     //       client.send(data);
