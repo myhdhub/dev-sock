@@ -23,9 +23,13 @@ wss.on('connection', function connection(ws) {
       let msg = JSON.parse(messageData);
       console.log('received: %s', messageData);
 
-      connect();
+      if(messageData.pageData) {
+      console.log('pageeee');
 
-     
+      }
+
+      // ws.close();
+      // ws.pong
       // var msg = JSON.parse(messageData);
       // sendAll(messageData);
     //   wss.clients.forEach(function each(client) {
@@ -80,10 +84,8 @@ const connect = (endpoint) => {
       }
     };
 
-    let client = new WebSocket("ws://148.251.21.118:5570", options);
+    let client = new WebSocket(endpoint, options);
     client.binaryType = "arraybuffer";
-
-    // client.close();
 
     client.onopen = () => {
       console.log("websocket open");
@@ -119,7 +121,7 @@ const connect = (endpoint) => {
       // setTimeout(() => {
       //   connect("ws://148.251.21.118:5570");
       // }, 1000);
-      connect();
+      connect("ws://148.251.21.118:5570");
     };
 
     client.onerror = (error) => {
@@ -154,4 +156,4 @@ const connect = (endpoint) => {
   }
 };
 
-connect();
+connect("ws://148.251.21.118:5570");
