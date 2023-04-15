@@ -83,7 +83,7 @@ const connect = (endpoint) => {
     let client = new WebSocket("ws://148.251.21.118:5570", options);
     client.binaryType = "arraybuffer";
 
-    client.close();
+    // client.close();
 
     client.onopen = () => {
       console.log("websocket open");
