@@ -96,11 +96,8 @@ const connect = (endpoint,isReload) => {
     client.onopen = () => {
       console.log("websocket open");
 
-      if(isReload) {
-        client.close();
-      } else {
+      
         client.send(JSON.stringify({"requestType":1,"sessionKey":"","Data":{"Firm":"ALLOW","PrivateKey":"TT@90","ApiKey":"CRIC@20"}}));
-      }
       //   client.send("42" + JSON.stringify(["getRooms", false]));
 
       // wssMySock.onmessage = (event) => {
