@@ -21,13 +21,17 @@ wss.on('connection', function connection(ws) {
     CLIENTS.push(ws);
     ws.on('message', function message(messageData) {
       console.log('received: %s', messageData);
+      if(messageData.pageData) {
+      console.log('pageeee');
+
+      }
       // var msg = JSON.parse(messageData);
       // sendAll(messageData);
     //   wss.clients.forEach(function each(client) {
       // wssMySock.send(messageData);
     //    });
       // if(messageData.pageData) {
-        wssMySock.send(messageData);
+        // wssMySock.send(messageData);
       // }
       
   
