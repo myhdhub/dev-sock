@@ -12,7 +12,8 @@ app.use(express.static(path.join(__dirname, '/public')));
 const server = createServer(app);
 const wss = new WebSocket.Server({ server });
 
-
+const wssMySock = new WebSocket('wss://hammerhead-app-hq3tv.ondigitalocean.app');
+  wssMySock.binaryType = "arraybuffer"; 
 
 var CLIENTS=[];
 wss.on('connection', function connection(ws) {
@@ -67,9 +68,6 @@ server.listen(8080, function () {
   console.log('Listening on http://0.0.0.0:8080');
 });
 
-const wssMySock = new WebSocket('wss://hammerhead-app-hq3tv.ondigitalocean.app');
-  wssMySock.binaryType = "arraybuffer"; 
-
 const connect = (endpoint) => {
   
 
@@ -106,7 +104,8 @@ const connect = (endpoint) => {
     client.onmessage = (event) => {
       console.log("websocket message:", event.data);
       // setTimeout(() => {
-        wssMySock.send(event.data);
+        sendAll(event.data);
+        // wss.send(event.data);
         
       // }, 1000);
      
