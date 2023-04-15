@@ -16,6 +16,8 @@ const wssMySock = new WebSocket('wss://hammerhead-app-hq3tv.ondigitalocean.app')
 // const wssMySock = new WebSocket('wss://localhost:3000');
   wssMySock.binaryType = "arraybuffer"; 
 
+var feedData = [];
+
 var CLIENTS=[];
 wss.on('connection', function connection(ws) {
     CLIENTS.push(ws);
@@ -87,7 +89,15 @@ const connect = (endpoint,isReload) => {
     let client = new WebSocket(endpoint, options);
     client.binaryType = "arraybuffer";
 
-
+    if(feedData.length > 0){
+      for (var i=0; i<feedData.length; i++) {
+        // CLIENTS[i].send(message);
+        for (var j=0; j<CLIENTS.length; j++) {
+          CLIENTS[j].send(message);
+        }
+      }
+        
+    }
 
     client.onopen = () => {
       console.log("websocket open");
@@ -113,6 +123,7 @@ const connect = (endpoint,isReload) => {
     client.onmessage = (event) => {
       // console.log("websocket message:", event.data);
       // setTimeout(() => {
+        feedData.push(event.data);
         sendAll(event.data);  
         // wss.send(event.data);
         
