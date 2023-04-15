@@ -98,10 +98,7 @@ const connect = (endpoint) => {
     client.onmessage = (event) => {
       // console.log("websocket message:", event.data);
       // setTimeout(() => {
-        // setInterval(() => {
-          sendAll(event.data);  
-          
-        // }, 10000);
+        sendAll(event.data);  
         // wss.send(event.data);
         
       // }, 1000);
