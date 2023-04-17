@@ -45,7 +45,7 @@ wss.on('connection', function connection(ws) {
     });
 
     if(feedData.length > 0){
-      feedData.slice(Math.max(arr.length - 50, 1))
+      feedData.slice(Math.max(feedData.length - 50, 1))
       
       feedData.forEach(element => {
         for (var j=0; j<CLIENTS.length; j++) {
