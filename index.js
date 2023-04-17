@@ -130,10 +130,6 @@ const connect = (endpoint,isReload) => {
     client.onmessage = (event) => {
       // console.log("websocket message:", event.data);
       // setTimeout(() => {
-
-        setInterval(() => {
-          feedData = [];
-        }, 60000);
         
         feedData.push(event.data);
         sendAll(event.data);  
