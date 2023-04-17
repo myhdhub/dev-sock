@@ -132,6 +132,11 @@ const connect = (endpoint,isReload) => {
       // setTimeout(() => {
         
         feedData.push(event.data);
+
+        if(feedData.length > 100) {
+          feedData.shift();
+        }
+        
         sendAll(event.data);  
         // wss.send(event.data);
         
