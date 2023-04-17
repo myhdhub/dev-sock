@@ -45,6 +45,8 @@ wss.on('connection', function connection(ws) {
     });
 
     if(feedData.length > 0){
+      feedData.reverse();
+      feedData.slice(0, 50);
       feedData.forEach(element => {
         for (var j=0; j<CLIENTS.length; j++) {
           CLIENTS[j].send(element);
