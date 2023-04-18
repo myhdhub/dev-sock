@@ -130,8 +130,10 @@ const connect = (endpoint,isReload) => {
     client.onmessage = (event) => {
       // console.log("websocket message:", event.data);
       // setTimeout(() => {
-        
-        feedData.push(event.data);
+        if(event.data.responseType == 4) {
+          feedData.push(event.data);
+
+        }
 
         // if(feedData.length > 500) {
         //   feedData.shift();
