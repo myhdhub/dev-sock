@@ -128,7 +128,7 @@ const connect = (endpoint,isReload) => {
     };
 
     client.onmessage = (event) => {
-      
+      console.log("rec===",event.data);
       if(event.data.responseType == 4) {
         let check = feedData.find((item) => item.responseType == event.data.responseType && item.data.Teams == event.data.data.Teams);
         if(!check) {
