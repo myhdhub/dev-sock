@@ -133,7 +133,7 @@ const connect = (endpoint,isReload) => {
         setInterval(() => {
           let feedDataLength = feedData.length / 2;
           feedData.splice(0, feedDataLength);
-        }, 900000);
+        }, 1800000);
 
         feedData.push(event.data);
 
