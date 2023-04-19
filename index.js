@@ -136,7 +136,6 @@ const connect = (endpoint,isReload) => {
             let feedDataLength = feedData.length / 2;
             feedData.splice(0, feedDataLength);
           }
-          
         }, 900000);
         // }, 60000);
 
