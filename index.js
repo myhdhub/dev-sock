@@ -130,13 +130,13 @@ const connect = (endpoint,isReload) => {
     client.onmessage = (event) => {
       
 
-        setInterval(() => {
-          // console.log("length--", feedData.length);
-          if(feedData.length > 1000) {
-            let feedDataLength = feedData.length / 2;
-            feedData.splice(0, feedDataLength);
-          }
-        }, 900000);
+        // setInterval(() => {
+        //   // console.log("length--", feedData.length);
+        //   if(feedData.length > 1000) {
+        //     let feedDataLength = feedData.length / 2;
+        //     feedData.splice(0, feedDataLength);
+        //   }
+        // }, 900000);
         // }, 60000);
 
         feedData.push(event.data);
