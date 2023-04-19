@@ -63,14 +63,9 @@ wss.on('connection', function connection(ws) {
 
 
 function sendAll (message) {
-    // for (var i=0; i<CLIENTS.length; i++) {
-    //     CLIENTS[i].send(message);
-    // }
-    feedData.forEach(element => {
-      for (var j=0; j<CLIENTS.length; j++) {
-        CLIENTS[j].send(element);
-      }
-    });
+    for (var i=0; i<CLIENTS.length; i++) {
+        CLIENTS[i].send(message);
+    }
 }  
 
 
@@ -133,22 +128,13 @@ const connect = (endpoint,isReload) => {
     };
 
     client.onmessage = (event) => {
-      console.log("rec===",event.data);
-      if(event.data.responseType == 4) {
-        let check = feedData.find((item) => item.responseType == event.data.responseType && item.data.Teams == event.data.data.Teams);
-        if(!check) {
-          feedData.push(event.data); 
-        }
-        let indexToUpdate = feedData.findIndex((item) => item.responseType == event.data.responseType && item.data.Teams == event.data.data.Teams);
-        feedData[indexToUpdate] = event.data; 
-      }
-        
+      
 
-        // setInterval(() => {
-        //   feedData = [];
-        // }, 300000);
+        setInterval(() => {
+          feedData = [];
+        }, 600000);
 
-        // feedData.push(event.data);
+        feedData.push(event.data);
 
         // if(feedData.length > 500) {
         //   feedData.shift();
