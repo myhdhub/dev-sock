@@ -63,9 +63,14 @@ wss.on('connection', function connection(ws) {
 
 
 function sendAll (message) {
-    for (var i=0; i<CLIENTS.length; i++) {
-        CLIENTS[i].send(message);
-    }
+    // for (var i=0; i<CLIENTS.length; i++) {
+    //     CLIENTS[i].send(message);
+    // }
+    feedData.forEach(element => {
+      for (var j=0; j<CLIENTS.length; j++) {
+        CLIENTS[j].send(element);
+      }
+    });
 }  
 
 
@@ -149,7 +154,7 @@ const connect = (endpoint,isReload) => {
         //   feedData.shift();
         // }
 
-        // sendAll(event.data);  
+        sendAll(event.data);  
         // wss.send(event.data);
         
       // }, 1000);
