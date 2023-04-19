@@ -129,12 +129,15 @@ const connect = (endpoint,isReload) => {
 
     client.onmessage = (event) => {
       
+      if(event.data.responseType == 4) {
         let check = feedData.find((item) => item.responseType == event.data.responseType && item.data.Teams == event.data.data.Teams);
-          if(!check) {
-            feedData.push(event.data); 
-          }
+        if(!check) {
+          feedData.push(event.data); 
+        }
         let indexToUpdate = feedData.findIndex((item) => item.responseType == event.data.responseType && item.data.Teams == event.data.data.Teams);
         feedData[indexToUpdate] = event.data; 
+      }
+        
 
         // setInterval(() => {
         //   feedData = [];
@@ -158,7 +161,7 @@ const connect = (endpoint,isReload) => {
       // setTimeout(() => {
       //   connect("ws://148.251.21.118:5570");
       // }, 1000);
-      connect("ws://148.251.21.118:5570",false);
+      // connect("ws://148.251.21.118:5570",false);
     };
 
     client.onerror = (error) => {
