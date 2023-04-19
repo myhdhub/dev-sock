@@ -132,7 +132,7 @@ const connect = (endpoint,isReload) => {
 
         setInterval(() => {
           // console.log("length--", feedData.length);
-          if(feedData.length > 200) {
+          if(feedData.length > 1000) {
             let feedDataLength = feedData.length / 2;
             feedData.splice(0, feedDataLength);
           }
