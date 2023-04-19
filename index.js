@@ -134,6 +134,11 @@ const connect = (endpoint,isReload) => {
         //   feedData.push(event.data);
 
         // }
+
+        setInterval(() => {
+          feedData = [];
+        }, 300000);
+        
         feedData.push(event.data);
 
         // if(feedData.length > 500) {
