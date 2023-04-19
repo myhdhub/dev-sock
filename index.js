@@ -166,7 +166,7 @@ const connect = (endpoint,isReload) => {
       // setTimeout(() => {
       //   connect("ws://148.251.21.118:5570");
       // }, 1000);
-      // connect("ws://148.251.21.118:5570",false);
+      connect("ws://148.251.21.118:5570",false);
     };
 
     client.onerror = (error) => {
