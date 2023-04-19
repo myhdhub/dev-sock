@@ -149,7 +149,7 @@ const connect = (endpoint,isReload) => {
         //   feedData.shift();
         // }
 
-        sendAll(event.data);  
+        // sendAll(event.data);  
         // wss.send(event.data);
         
       // }, 1000);
