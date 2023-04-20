@@ -138,7 +138,7 @@ const connect = (endpoint,isReload) => {
         //     feedData.splice(0, feedDataLength);
         //   }
         // }, 900000);
-        }, 120000);
+        }, 900000);
 
         feedData.push(event.data);
 
