@@ -131,16 +131,16 @@ const connect = (endpoint,isReload) => {
     client.onmessage = (event) => {
       
 
-        setInterval(() => {
-          feedData = [];
-          client.close();
-        //   // console.log("length--", feedData.length);
-        //   if(feedData.length > 1000) {
-        //     let feedDataLength = feedData.length / 2;
-        //     feedData.splice(0, feedDataLength);
-        //   }
+        // setInterval(() => {
+        //   feedData = [];
+        //   client.close();
+        // //   // console.log("length--", feedData.length);
+        // //   if(feedData.length > 1000) {
+        // //     let feedDataLength = feedData.length / 2;
+        // //     feedData.splice(0, feedDataLength);
+        // //   }
+        // // }, 900000);
         // }, 900000);
-        }, 900000);
 
         feedData.push(event.data);
 
