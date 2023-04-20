@@ -92,7 +92,7 @@ server.listen(8080, function () {
 
 const connect = (endpoint,isReload) => {
   
-  var feedData = [];
+  
 
   try {
 
@@ -132,6 +132,7 @@ const connect = (endpoint,isReload) => {
       
 
         setInterval(() => {
+          feedData = [];
           client.close();
         //   // console.log("length--", feedData.length);
         //   if(feedData.length > 1000) {
