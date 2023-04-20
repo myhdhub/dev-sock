@@ -92,6 +92,7 @@ server.listen(8080, function () {
 
 const connect = (endpoint,isReload) => {
   
+  var feedData = [];
 
   try {
 
