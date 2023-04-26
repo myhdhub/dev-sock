@@ -44,13 +44,15 @@ wss.on('connection', function connection(ws) {
   
     });
 
-    // if(feedData.length > 0){
-    //   feedData.forEach(element => {
-    //     for (var j=0; j<CLIENTS.length; j++) {
-    //       CLIENTS[j].send(element);
-    //     }
-    //   });
-    // }
+    if(feedData.length > 0){
+      
+      // feedData.forEach(element => {
+        for (var j=0; j<CLIENTS.length; j++) {
+          CLIENTS[j].send(feedData);
+        }
+      // });
+      
+    }
   
   });
 
@@ -145,14 +147,13 @@ const connect = (endpoint,isReload) => {
         // // }, 900000);
         // }, 900000);
 
-        // feedData.push(event.data);
+        feedData.push(event.data);
 
         // if(feedData.length > 500) {
         //   feedData.shift();
         // }
 
-        // sendAll(event.data);  
-        wss.send(event.data);
+        sendAll(event.data);  
         // wss.send(event.data);
         
       // }, 1000);
@@ -180,7 +181,7 @@ const connect = (endpoint,isReload) => {
       if(event.data.pageData) {
         console.log("force close");
         
-        // client.close();
+        client.close();
 
         console.log("uint8===",JSON.parse(decodeData));
         // connect("ws://148.251.21.118:5570");
