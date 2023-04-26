@@ -3,7 +3,7 @@
 const express = require('express');
 const path = require('path');
 const { createServer } = require('http');
-
+var pm2 = require('pm2');
 const WebSocket = require('ws');
 
 const app = express();
@@ -85,6 +85,16 @@ function sendAll (message) {
 //     clearInterval(id);
 //   });
 // });
+
+pm2.connect(function(err) {
+  if (err) throw err;
+
+setTimeout(function worker() {
+  console.log("Restarting app...");
+  pm2.restart('app', function() {});
+  setTimeout(worker, 300000);
+  }, 300000);
+});
 
 server.listen(8080, function () {
   console.log('Listening on http://0.0.0.0:8080');
