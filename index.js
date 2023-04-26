@@ -19,11 +19,24 @@ const wssMySock = new WebSocket('wss://hammerhead-app-hq3tv.ondigitalocean.app')
 var feedData = [];
 
 var CLIENTS=[];
+
+wss.getUniqueID = function () {
+  function s4() {
+      return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+  }
+  return s4() + s4() + '-' + s4();
+};
+
 wss.on('connection', function connection(ws) {
+
+    ws.id = wss.getUniqueID();
+
     CLIENTS.push(ws);
+
     ws.on('message', function message(messageData) {
       let msg = JSON.parse(messageData);
       console.log('received: %s', msg);
+      console.log('received msg from: %s', ws);
 
       // if(messageData.pageData) {
       // console.log('pageeee');
