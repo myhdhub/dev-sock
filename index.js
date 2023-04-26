@@ -46,11 +46,11 @@ wss.on('connection', function connection(ws) {
 
     if(feedData.length > 0){
       
-      // feedData.forEach(element => {
+      feedData.forEach(element => {
         for (var j=0; j<CLIENTS.length; j++) {
-          CLIENTS[j].send(feedData);
+          CLIENTS[j].send(element);
         }
-      // });
+      });
       
     }
   
