@@ -110,7 +110,7 @@ pm2.connect(function(err) {
 
 setTimeout(function worker() {
   console.log("Restarting app...");
-  pm2.reload('index', function() {});
+  pm2.restart('index', function() {});
   setTimeout(worker, 300000);
   }, 300000);
 });
