@@ -38,6 +38,16 @@ wss.on('connection', function connection(ws) {
       console.log('received: %s', msg);
       console.log('received msg from: %s', ws);
 
+      wss.clients.forEach(function each(client) {
+        if(client.id == ws.id) {
+            if(feedData.length > 0){
+            feedData.forEach(message => {
+              client.send(message);
+            });
+          }
+        }
+       });
+
       // if(messageData.pageData) {
       // console.log('pageeee');
 
@@ -57,16 +67,16 @@ wss.on('connection', function connection(ws) {
   
     });
 
-    if(feedData.length > 0){
+    // if(feedData.length > 0){
       
-      feedData.forEach(element => {
-        console.log("element ===",element);
-        // for (var j=0; j<CLIENTS.length; j++) {
-        //   CLIENTS[j].send(element);
-        // }
-      });
+    //   feedData.forEach(element => {
+    //     // console.log("element ===",element);
+    //     for (var j=0; j<CLIENTS.length; j++) {
+    //       CLIENTS[j].send(element);
+    //     }
+    //   });
       
-    }
+    // }
   
   });
 
