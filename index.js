@@ -36,7 +36,7 @@ wss.on('connection', function connection(ws) {
     ws.on('message', function message(messageData) {
       let msg = JSON.parse(messageData);
       console.log('received: %s', msg);
-      console.log('received msg from: %s', ws);
+      // console.log('received msg from: %s', ws);
 
       wss.clients.forEach(function each(client) {
         if(client.id == ws.id) {
