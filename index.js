@@ -152,7 +152,7 @@ const connect = (endpoint,isReload) => {
         // }
 
         // sendAll(event.data);  
-        wssMySock.send(event.data);
+        wss.send(event.data);
         // wss.send(event.data);
         
       // }, 1000);
