@@ -60,9 +60,10 @@ wss.on('connection', function connection(ws) {
     if(feedData.length > 0){
       
       feedData.forEach(element => {
-        for (var j=0; j<CLIENTS.length; j++) {
-          CLIENTS[j].send(element);
-        }
+        console.log("element ===",element);
+        // for (var j=0; j<CLIENTS.length; j++) {
+        //   CLIENTS[j].send(element);
+        // }
       });
       
     }
