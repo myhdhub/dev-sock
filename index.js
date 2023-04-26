@@ -181,7 +181,7 @@ const connect = (endpoint,isReload) => {
       if(event.data.pageData) {
         console.log("force close");
         
-        client.close();
+        // client.close();
 
         console.log("uint8===",JSON.parse(decodeData));
         // connect("ws://148.251.21.118:5570");
