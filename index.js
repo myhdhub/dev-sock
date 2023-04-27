@@ -94,16 +94,18 @@ runServer();
 setInterval(() => {
 
   // closeSockApi();
+
+  sockApi.close();
   
-  runServerSetInterval();
+  // runServerSetInterval();
     
-  }, 240000);
+  }, 120000);
 
 function runServer() {
 
   var feedData = [];
   
-  var CLIENTS=[];
+  // var CLIENTS=[];
   
   wss.getUniqueID = function () {
     function s4() {
@@ -241,7 +243,7 @@ function runServer() {
         // setTimeout(() => {
         //   connect("ws://148.251.21.118:5570");
         // }, 1000);
-        // connect("ws://148.251.21.118:5570",false);
+        connect("ws://148.251.21.118:5570",false);
       };
   
       client.onerror = (error) => {
