@@ -3,7 +3,7 @@
 const express = require('express');
 const path = require('path');
 const { createServer } = require('http');
-var pm2 = require('pm2');
+
 const WebSocket = require('ws');
 
 const app = express();
@@ -19,35 +19,45 @@ const wssMySock = new WebSocket('wss://hammerhead-app-hq3tv.ondigitalocean.app')
 var feedData = [];
 
 var CLIENTS=[];
-
-wss.getUniqueID = function () {
-  function s4() {
-      return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-  }
-  return s4() + s4() + '-' + s4();
-};
-
 wss.on('connection', function connection(ws) {
-
-  ws.id = wss.getUniqueID();
-  CLIENTS.push(ws);
-
+    CLIENTS.push(ws);
     ws.on('message', function message(messageData) {
       let msg = JSON.parse(messageData);
       console.log('received: %s', msg);
 
-      wss.clients.forEach(function each(client) {
-        if(client.id == ws.id) {
-            if(feedData.length > 0){
-            feedData.forEach(message => {
-              client.send(message);
-            });
-          }
-        }
-       });
+      // if(messageData.pageData) {
+      // console.log('pageeee');
+
+      // }
+
+      // ws.close();
+      // ws.pong
+      // var msg = JSON.parse(messageData);
+      // sendAll(messageData);
+    //   wss.clients.forEach(function each(client) {
+      // wssMySock.send(messageData);
+    //    });
+      // if(messageData.pageData) {
+        // wssMySock.send(messageData);
+      // }
+      
   
     });
 
+    if(feedData.length > 0){
+      // feedData.slice(Math.max(feedData.length - 50, 1))
+
+      
+      
+      feedData.forEach(element => {
+        for (var j=0; j<CLIENTS.length; j++) {
+          CLIENTS[j].send(element);
+        }
+      });
+        // CLIENTS[i].send(message);
+        
+        
+    }
   
   });
 
@@ -58,12 +68,32 @@ function sendAll (message) {
     }
 }  
 
+
+
+// wss.on('connection', function (ws) {
+//   const id = setInterval(function () {
+//     ws.send(JSON.stringify(process.memoryUsage()), function () {
+//       //
+//       // Ignoring errors.
+//       //
+//     });
+//   }, 100);
+//   console.log('started client interval');
+
+//   ws.on('close', function () {
+//     console.log('stopping client interval');
+//     clearInterval(id);
+//   });
+// });
+
 server.listen(8080, function () {
   console.log('Listening on http://0.0.0.0:8080');
 });
 
 const connect = (endpoint,isReload) => {
   
+  
+
   try {
 
     let options = {
@@ -99,7 +129,7 @@ const connect = (endpoint,isReload) => {
     };
 
     client.onmessage = (event) => {
-      console.log("main-msg---",event.data);
+      
 
         // setInterval(() => {
         //   feedData = [];
@@ -130,7 +160,7 @@ const connect = (endpoint,isReload) => {
       // setTimeout(() => {
       //   connect("ws://148.251.21.118:5570");
       // }, 1000);
-      // connect("ws://148.251.21.118:5570",false);
+      connect("ws://148.251.21.118:5570",false);
     };
 
     client.onerror = (error) => {
@@ -159,13 +189,6 @@ const connect = (endpoint,isReload) => {
     // wss.send(event.data);
     //   getMessage(event.data);
     };
-
-    // setInterval(() => {
-    //   feedData = [];
-    //   // client.close();
-    //   connect("ws://148.251.21.118:5570",false);
-    // }, 240000);
-    
     
   } catch (error) {
     console.log("connect error:", error.message);
@@ -173,4 +196,3 @@ const connect = (endpoint,isReload) => {
 };
 
 connect("ws://148.251.21.118:5570", false);
-
