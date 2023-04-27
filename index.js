@@ -97,8 +97,7 @@ setInterval(() => {
 
   sockApi.close();
 
-  const sockApi = new WebSocket('ws://148.251.21.118:5570');
-
+  runServer();
   
   // runServerSetInterval();
     
