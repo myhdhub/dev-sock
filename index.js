@@ -11,6 +11,8 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 const server = createServer(app);
 
+var feedData = [];
+var CLIENTS=[];
 
 const wss = new WebSocket.Server({ server });
   
@@ -90,8 +92,8 @@ runServer();
 
 setInterval(() => {
 
-  // closeSockApi();
-  
+  sockApi.close();
+
   runServerSetInterval();
     
   }, 60000);
@@ -281,8 +283,10 @@ function runServer() {
 
 function runServerSetInterval() {
 
+  const sockApi = new WebSocket('ws://148.251.21.118:5570');
+
+
   var feedData = [];
-  
   
   function sendAll (message) {
       for (var i=0; i<CLIENTS.length; i++) {
@@ -361,7 +365,7 @@ function runServerSetInterval() {
         // setTimeout(() => {
         //   connect("ws://148.251.21.118:5570");
         // }, 1000);
-        connect("ws://148.251.21.118:5570",false);
+        // connect("ws://148.251.21.118:5570",false);
       };
   
       client.onerror = (error) => {
