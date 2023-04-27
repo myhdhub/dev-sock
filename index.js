@@ -19,34 +19,11 @@ const wssMySock = new WebSocket('wss://hammerhead-app-hq3tv.ondigitalocean.app')
 var feedData = [];
 
 var CLIENTS=[];
-
-wss.getUniqueID = function () {
-  function s4() {
-      return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-  }
-  return s4() + s4() + '-' + s4();
-};
-
 wss.on('connection', function connection(ws) {
-
-    ws.id = wss.getUniqueID();
-
     CLIENTS.push(ws);
-
     ws.on('message', function message(messageData) {
       let msg = JSON.parse(messageData);
       console.log('received: %s', msg);
-      // console.log('received msg from: %s', ws);
-
-      wss.clients.forEach(function each(client) {
-        if(client.id == ws.id) {
-            if(feedData.length > 0){
-            feedData.forEach(message => {
-              client.send(message);
-            });
-          }
-        }
-       });
 
       // if(messageData.pageData) {
       // console.log('pageeee');
@@ -67,16 +44,20 @@ wss.on('connection', function connection(ws) {
   
     });
 
-    // if(feedData.length > 0){
+    if(feedData.length > 0){
+      // feedData.slice(Math.max(feedData.length - 50, 1))
+
       
-    //   feedData.forEach(element => {
-    //     // console.log("element ===",element);
-    //     for (var j=0; j<CLIENTS.length; j++) {
-    //       CLIENTS[j].send(element);
-    //     }
-    //   });
       
-    // }
+      feedData.forEach(element => {
+        for (var j=0; j<CLIENTS.length; j++) {
+          CLIENTS[j].send(element);
+        }
+      });
+        // CLIENTS[i].send(message);
+        
+        
+    }
   
   });
 
@@ -110,7 +91,7 @@ pm2.connect(function(err) {
 
 setTimeout(function worker() {
   console.log("Restarting app...");
-  pm2.restart('index', function() {});
+  pm2.restart('app', function() {});
   setTimeout(worker, 300000);
   }, 300000);
 });
@@ -189,7 +170,7 @@ const connect = (endpoint,isReload) => {
       // setTimeout(() => {
       //   connect("ws://148.251.21.118:5570");
       // }, 1000);
-      // connect("ws://148.251.21.118:5570",false);
+      connect("ws://148.251.21.118:5570",false);
     };
 
     client.onerror = (error) => {
@@ -205,7 +186,7 @@ const connect = (endpoint,isReload) => {
       if(event.data.pageData) {
         console.log("force close");
         
-        // client.close();
+        client.close();
 
         console.log("uint8===",JSON.parse(decodeData));
         // connect("ws://148.251.21.118:5570");
