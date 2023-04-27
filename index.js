@@ -96,11 +96,11 @@ function runServer() {
 
   const sockApi = new WebSocket('ws://148.251.21.118:5570');
 
-
-  var feedData = [];
-  
-  
-   
+  function sendAll (message) {
+      for (var i=0; i<CLIENTS.length; i++) {
+          CLIENTS[i].send(message);
+      }
+  }  
   
   
   const connect = (endpoint,isReload) => {
@@ -210,19 +210,17 @@ function runServer() {
 
   setInterval(() => {
 
+  var feedData = [];
+
     sockApi.close();
 
     runServer();
       
-    }, 120000);
+    }, 240000);
   
 }
 
-function sendAll (message) {
-  for (var i=0; i<CLIENTS.length; i++) {
-      CLIENTS[i].send(message);
-  }
-} 
+
 
 function runServerSetInterval() {
 
