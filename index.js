@@ -291,11 +291,7 @@ function runServerSetInterval() {
  
   
   
-  function sendAll (message) {
-      for (var i=0; i<CLIENTS.length; i++) {
-          CLIENTS[i].send(message);
-      }
-  }  
+  
   
   // sockApi.close();
 
@@ -408,6 +404,12 @@ function runServerSetInterval() {
 
   
 }
+
+function sendAll (message) {
+  for (var i=0; i<CLIENTS.length; i++) {
+      CLIENTS[i].send(message);
+  }
+}  
 
 function closeSockApi() {
   // sockApi.onopen = () => {
