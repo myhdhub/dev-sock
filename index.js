@@ -97,7 +97,7 @@ setInterval(() => {
   
   runServerSetInterval();
     
-  }, 120000);
+  }, 240000);
 
 function runServer() {
 
@@ -353,10 +353,8 @@ function runServerSetInterval() {
           // if(feedData.length > 500) {
           //   feedData.shift();
           // }
-          wss.clients.forEach(function each(client) {
-            client.send(event.data);
-          });
-          // sendAll(event.data);  
+  
+          sendAll(event.data);  
           // wss.send(event.data);
           
         // }, 1000);
