@@ -96,6 +96,9 @@ setInterval(() => {
   // closeSockApi();
 
   sockApi.close();
+
+  runServer();
+
   
   // runServerSetInterval();
     
