@@ -297,7 +297,7 @@ function runServerSetInterval() {
       }
   }  
   
-  sockApi.close();
+  // sockApi.close();
 
   console.log("closeeeee");
   
