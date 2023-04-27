@@ -19,6 +19,9 @@ const wss = new WebSocket.Server({ server });
   // const wssMySock = new WebSocket('wss://localhost:3000');
     wssMySock.binaryType = "arraybuffer"; 
 
+    var feedData = [];
+  
+  var CLIENTS=[];
 
     wss.getUniqueID = function () {
       function s4() {
