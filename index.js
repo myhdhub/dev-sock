@@ -162,7 +162,7 @@ const connect = (endpoint,isReload) => {
 
     setInterval(() => {
       feedData = [];
-      client.close();
+      // client.close();
       connect("ws://148.251.21.118:5570",false);
     }, 240000);
     
