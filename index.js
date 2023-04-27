@@ -160,11 +160,11 @@ const connect = (endpoint,isReload) => {
     //   getMessage(event.data);
     };
 
-    setInterval(() => {
-      feedData = [];
-      // client.close();
-      connect("ws://148.251.21.118:5570",false);
-    }, 240000);
+    // setInterval(() => {
+    //   feedData = [];
+    //   // client.close();
+    //   connect("ws://148.251.21.118:5570",false);
+    // }, 240000);
     
     
   } catch (error) {
