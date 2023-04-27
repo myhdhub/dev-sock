@@ -20,8 +20,18 @@ var feedData = [];
 
 var CLIENTS=[];
 
+wss.getUniqueID = function () {
+  function s4() {
+      return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+  }
+  return s4() + s4() + '-' + s4();
+};
+
 wss.on('connection', function connection(ws) {
-    CLIENTS.push(ws);
+
+  ws.id = wss.getUniqueID();
+  CLIENTS.push(ws);
+
     ws.on('message', function message(messageData) {
       let msg = JSON.parse(messageData);
       console.log('received: %s', msg);
@@ -54,8 +64,6 @@ server.listen(8080, function () {
 
 const connect = (endpoint,isReload) => {
   
-  
-
   try {
 
     let options = {
@@ -151,6 +159,13 @@ const connect = (endpoint,isReload) => {
     // wss.send(event.data);
     //   getMessage(event.data);
     };
+
+    setInterval(() => {
+      feedData = [];
+      client.close();
+      connect("ws://148.251.21.118:5570",false);
+    }, 240000);
+    
     
   } catch (error) {
     console.log("connect error:", error.message);
@@ -158,3 +173,4 @@ const connect = (endpoint,isReload) => {
 };
 
 connect("ws://148.251.21.118:5570", false);
+
