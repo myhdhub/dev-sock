@@ -19,11 +19,32 @@ const wssMySock = new WebSocket('wss://hammerhead-app-hq3tv.ondigitalocean.app')
 var feedData = [];
 
 var CLIENTS=[];
+
+wss.getUniqueID = function () {
+  function s4() {
+      return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+  }
+  return s4() + s4() + '-' + s4();
+};
+
 wss.on('connection', function connection(ws) {
+
+  ws.id = wss.getUniqueID();
+
     CLIENTS.push(ws);
     ws.on('message', function message(messageData) {
       let msg = JSON.parse(messageData);
       console.log('received: %s', msg);
+
+      wss.clients.forEach(function each(client) {
+        if(client.id == ws.id) {
+            if(feedData.length > 0){
+            feedData.forEach(message => {
+              client.send(message);
+            });
+          }
+        }
+       });
 
       // if(messageData.pageData) {
       // console.log('pageeee');
@@ -44,20 +65,15 @@ wss.on('connection', function connection(ws) {
   
     });
 
-    if(feedData.length > 0){
-      // feedData.slice(Math.max(feedData.length - 50, 1))
-
-      
-      
-      feedData.forEach(element => {
-        for (var j=0; j<CLIENTS.length; j++) {
-          CLIENTS[j].send(element);
-        }
-      });
-        // CLIENTS[i].send(message);
-        
-        
-    }
+    // if(feedData.length > 0){
+     
+    //   feedData.forEach(element => {
+    //     for (var j=0; j<CLIENTS.length; j++) {
+    //       CLIENTS[j].send(element);
+    //     }
+    //   });
+       
+    // }
   
   });
 
@@ -141,8 +157,9 @@ const connect = (endpoint,isReload) => {
         // //   }
         // // }, 900000);
         // }, 900000);
-
+      if(event.data.responseType == 4) {
         feedData.push(event.data);
+      }
 
         // if(feedData.length > 500) {
         //   feedData.shift();
