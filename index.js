@@ -14,6 +14,9 @@ const server = createServer(app);
 
 const wss = new WebSocket.Server({ server });
   
+  const wssMySock = new WebSocket('wss://hammerhead-app-hq3tv.ondigitalocean.app');
+  // const wssMySock = new WebSocket('wss://localhost:3000');
+    wssMySock.binaryType = "arraybuffer"; 
 
     var feedData = [];
   
@@ -84,36 +87,17 @@ server.listen(8080, function () {
 
 });
 
-function socketLinks() {
-  const wssMySock = new WebSocket('wss://hammerhead-app-hq3tv.ondigitalocean.app');
-  const sockApi = new WebSocket('ws://148.251.21.118:5570');
-  // const wssMySock = new WebSocket('wss://localhost:3000');
-    wssMySock.binaryType = "arraybuffer"; 
-}
-
 runServer();
 
 
-setInterval(() => {
 
-  // closeSockApi();
-
-  sockApi.close();
-
-  runServer();
-  
-  // runServerSetInterval();
-    
-  }, 120000);
 
 function runServer() {
 
-socketLinks();
+  const sockApi = new WebSocket('ws://148.251.21.118:5570');
 
 
   var feedData = [];
-  
-  // var CLIENTS=[];
   
   
   function sendAll (message) {
@@ -228,9 +212,15 @@ socketLinks();
 
   connect("ws://148.251.21.118:5570", false);
 
+  setInterval(() => {
 
+    sockApi.close();
+      
+    }, 120000);
   
 }
+
+
 
 function runServerSetInterval() {
 
