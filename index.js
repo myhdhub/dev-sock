@@ -286,12 +286,14 @@ function runServerSetInterval() {
 
   var feedData = [];
   
-  var CLIENTS=[];
-  
- 
+  // var CLIENTS=[];
   
   
-  
+  function sendAll (message) {
+      for (var i=0; i<CLIENTS.length; i++) {
+          CLIENTS[i].send(message);
+      }
+  }  
   
   // sockApi.close();
 
@@ -364,7 +366,7 @@ function runServerSetInterval() {
         // setTimeout(() => {
         //   connect("ws://148.251.21.118:5570");
         // }, 1000);
-        // connect("ws://148.251.21.118:5570",false);
+        connect("ws://148.251.21.118:5570",false);
       };
   
       client.onerror = (error) => {
@@ -404,12 +406,6 @@ function runServerSetInterval() {
 
   
 }
-
-function sendAll (message) {
-  for (var i=0; i<CLIENTS.length; i++) {
-      CLIENTS[i].send(message);
-  }
-}  
 
 function closeSockApi() {
   // sockApi.onopen = () => {
