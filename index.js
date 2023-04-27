@@ -353,8 +353,10 @@ function runServerSetInterval() {
           // if(feedData.length > 500) {
           //   feedData.shift();
           // }
-  
-          sendAll(event.data);  
+          wss.clients.forEach(function each(client) {
+            client.send(event.data);
+          });
+          // sendAll(event.data);  
           // wss.send(event.data);
           
         // }, 1000);
