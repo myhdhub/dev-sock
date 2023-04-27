@@ -100,11 +100,7 @@ function runServer() {
   var feedData = [];
   
   
-  function sendAll (message) {
-      for (var i=0; i<CLIENTS.length; i++) {
-          CLIENTS[i].send(message);
-      }
-  }  
+   
   
   
   const connect = (endpoint,isReload) => {
@@ -222,7 +218,11 @@ function runServer() {
   
 }
 
-
+function sendAll (message) {
+  for (var i=0; i<CLIENTS.length; i++) {
+      CLIENTS[i].send(message);
+  }
+} 
 
 function runServerSetInterval() {
 
