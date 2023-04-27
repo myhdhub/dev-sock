@@ -14,7 +14,6 @@ const server = createServer(app);
 
 const wss = new WebSocket.Server({ server });
   
-socketLinks();
 
     var feedData = [];
   
@@ -101,13 +100,16 @@ setInterval(() => {
 
   sockApi.close();
 
-  socketLinks();
+  runServer();
   
   // runServerSetInterval();
     
   }, 120000);
 
 function runServer() {
+
+socketLinks();
+
 
   var feedData = [];
   
