@@ -215,6 +215,8 @@ function runServer() {
   setInterval(() => {
 
     sockApi.close();
+
+    runServer();
       
     }, 120000);
   
