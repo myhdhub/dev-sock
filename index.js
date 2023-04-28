@@ -37,7 +37,7 @@ wss.on('connection', function connection(ws) {
       console.log('received: %s', msg);
 
       wss.clients.forEach(function each(client) {
-        if(client.id == ws.id) {
+        if(client != ws && client.id == ws.id) {
             if(feedData.length > 0){
             feedData.forEach(message => {
               client.send(message);
@@ -50,7 +50,9 @@ wss.on('connection', function connection(ws) {
   
   });
 
-
+setInterval(() => {
+  feedData = [];
+}, 1000);
 
 
 function sendAll (message) {
@@ -87,9 +89,7 @@ const connect = (endpoint,isReload) => {
 
       console.log("main--msg-",event.data);
       
-      if(event.data.responseType == '4') {
         feedData.push(event.data);
-      }
 
         sendAll(event.data);  
             
