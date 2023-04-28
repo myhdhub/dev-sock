@@ -37,7 +37,7 @@ wss.on('connection', function connection(ws) {
       console.log('received: %s', msg);
 
       wss.clients.forEach(function each(client) {
-        if(client != ws && client.id == ws.id) {
+        if(client.id == ws.id) {
             if(feedData.length > 0){
             feedData.forEach(message => {
               client.send(message);
