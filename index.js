@@ -51,7 +51,6 @@ wss.on('connection', function connection(ws) {
   });
 
 
-connect("ws://148.251.21.118:5570", false);
 
 
 function sendAll (message) {
@@ -131,3 +130,5 @@ const connect = (endpoint,isReload) => {
     console.log("connect error:", error.message);
   }
 };
+
+connect("ws://148.251.21.118:5570", false);
