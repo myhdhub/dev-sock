@@ -67,7 +67,7 @@ function sendAll (message) {
   }
 
     for (var i=0; i<CLIENTS.length; i++) {
-        CLIENTS[i].send(message);
+        CLIENTS[i].send(feedData);
     }
     console.log("feedData===",feedData);
 }  
