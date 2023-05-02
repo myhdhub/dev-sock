@@ -50,12 +50,19 @@ wss.on('connection', function connection(ws) {
   
   });
 
-setInterval(() => {
-  feedData = [];
-}, 1000);
-
 
 function sendAll (message) {
+
+  console.log("send all msg--",message);
+
+  // let check = feedData.find((item) => item.data.MatchId == this._socketData?.data.MatchId);
+  // if(!check) {
+  //   this.currentMatch.push(res); 
+  // }
+
+  // let indexToUpdate = this.currentMatch.findIndex((item) => item.data.Name == this._socketData.data.Name);
+  // this.currentMatch[indexToUpdate] = res;  
+
     for (var i=0; i<CLIENTS.length; i++) {
         CLIENTS[i].send(message);
     }
