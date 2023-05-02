@@ -16,11 +16,9 @@ const wss = new WebSocket.Server({ server });
 // const wssMySock = new WebSocket('wss://localhost:3000');
   //wssMySock.binaryType = "arraybuffer"; 
 
-var feedData = [
-  {
+var feedData = {
     'responseType4' : []
-  }
-];
+  };
 
 var CLIENTS=[];
 
@@ -60,12 +58,12 @@ function sendAll (message) {
     let parseMessage = JSON.parse(message);
   console.log("send all msg--",parseMessage);
   if(parseMessage.responseType == 4) {
-    let check = feedData['responseType4'].find((item) => item.data.MatchId == parseMessage.data.MatchId);
+    let check = feedData.responseType4.find((item) => item.data.MatchId == parseMessage.data.MatchId);
     if(!check) {
-      feedData['responseType4'].push(parseMessage); 
+      feedData.responseType4.push(parseMessage); 
     }
-    let indexToUpdate = feedData['responseType4'].findIndex((item) => item.data.MatchId == parseMessage.data.MatchId);
-    feedData['responseType4'][indexToUpdate] = parseMessage; 
+    let indexToUpdate = feedData.responseType4.findIndex((item) => item.data.MatchId == parseMessage.data.MatchId);
+    feedData.responseType4[indexToUpdate] = parseMessage; 
   }
 
     for (var i=0; i<CLIENTS.length; i++) {
