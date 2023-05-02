@@ -109,10 +109,10 @@ function sendAll (message) {
     for (var i=0; i<CLIENTS.length; i++) {
         CLIENTS[i].send(JSON.stringify(feedData));
     }
-    console.log("feedData===",feedData);
+    // console.log("feedData===",feedData);
 }  
 
-server.listen(3000, function () {
+server.listen(8080, function () {
   console.log('Listening on http://0.0.0.0:8080');
 });
 
