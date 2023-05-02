@@ -54,18 +54,19 @@ wss.on('connection', function connection(ws) {
 function sendAll (message) {
 
   console.log("send all msg--",message);
-
-  // let check = feedData.find((item) => item.data.MatchId == this._socketData?.data.MatchId);
-  // if(!check) {
-  //   this.currentMatch.push(res); 
-  // }
-
-  // let indexToUpdate = this.currentMatch.findIndex((item) => item.data.Name == this._socketData.data.Name);
-  // this.currentMatch[indexToUpdate] = res;  
+  if(message.responseType == 4) {
+    let check = feedData.find((item) => item.data.MatchId == message.data.MatchId);
+    if(!check) {
+      feedData.push(message); 
+    }
+    let indexToUpdate = feedData.findIndex((item) => item.data.MatchId == message.data.MatchId);
+    feedData[indexToUpdate] = message; 
+  }
 
     for (var i=0; i<CLIENTS.length; i++) {
         CLIENTS[i].send(message);
     }
+    console.log("feedData===",feedData);
 }  
 
 server.listen(8080, function () {
