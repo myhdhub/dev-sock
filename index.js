@@ -17,7 +17,11 @@ const wss = new WebSocket.Server({ server });
   //wssMySock.binaryType = "arraybuffer"; 
 
 var feedData = {
-    'responseType4' : []
+    'responseType4' : [],
+    'responseType56' : [],
+    'responseType10' : [],
+    'responseType11' : [],
+    'responseType8' : [],
   };
 
 var CLIENTS=[];
@@ -57,22 +61,58 @@ function sendAll (message) {
     
     let parseMessage = JSON.parse(message);
     console.log("send all msg--",parseMessage);
-  // if(parseMessage.responseType == 4) {
-  //   let check = feedData.responseType4.find((item) => item.data.MatchId == parseMessage.data.MatchId);
-  //   if(!check) {
-  //     feedData.responseType4.push(parseMessage); 
-  //   }
-  //   let indexToUpdate = feedData.responseType4.findIndex((item) => item.data.MatchId == parseMessage.data.MatchId);
-  //   feedData.responseType4[indexToUpdate] = parseMessage; 
-  // }
+  if(parseMessage.responseType == 4) {
+    let check = feedData.responseType4.find((item) => item.data.MatchId == parseMessage.data.MatchId);
+    if(!check) {
+      feedData.responseType4.push(parseMessage); 
+    }
+    let indexToUpdate = feedData.responseType4.findIndex((item) => item.data.MatchId == parseMessage.data.MatchId);
+    feedData.responseType4[indexToUpdate] = parseMessage; 
+  }
+
+  if(parseMessage.responseType == 5 || parseMessage.responseType == 6) {
+    let check = feedData.responseType56.find((item) => item.data.MatchId == parseMessage.data.MatchId && item.data.Name == parseMessage.data.Name);
+    if(!check) {
+      feedData.responseType56.push(parseMessage); 
+    }
+    let indexToUpdate = feedData.responseType56.findIndex((item) => item.data.MatchId == parseMessage.data.MatchId && item.data.Name == parseMessage.data.Name);
+    feedData.responseType56[indexToUpdate] = parseMessage; 
+  }
+
+  if(parseMessage.responseType == 10) {
+    let check = feedData.responseType10.find((item) => item.data.MatchId == parseMessage.data.MatchId && item.data.RateType == parseMessage.data.RateType);
+    if(!check) {
+      feedData.responseType10.push(parseMessage); 
+    }
+    let indexToUpdate = feedData.responseType10.findIndex((item) => item.data.MatchId == parseMessage.data.MatchId && item.data.RateType == parseMessage.data.RateType);
+    feedData.responseType10[indexToUpdate] = parseMessage; 
+  }
+
+  if(parseMessage.responseType == 11) {
+    let check = feedData.responseType11.find((item) => item.data.MatchId == parseMessage.data.MatchId && item.data.Name == parseMessage.data.Name);
+    if(!check) {
+      feedData.responseType11.push(parseMessage); 
+    }
+    let indexToUpdate = feedData.responseType11.findIndex((item) => item.data.MatchId == parseMessage.data.MatchId && item.data.Name == parseMessage.data.Name);
+    feedData.responseType11[indexToUpdate] = parseMessage; 
+  }
+
+  if(parseMessage.responseType == 8) {
+    let check = feedData.responseType8.find((item) => item.data.MatchId == parseMessage.data.MatchId);
+    if(!check) {
+      feedData.responseType8.push(parseMessage); 
+    }
+    let indexToUpdate = feedData.responseType8.findIndex((item) => item.data.MatchId == parseMessage.data.MatchId);
+    feedData.responseType8[indexToUpdate] = parseMessage; 
+  }
 
     for (var i=0; i<CLIENTS.length; i++) {
-        CLIENTS[i].send(message);
+        CLIENTS[i].send(JSON.stringify(feedData));
     }
     console.log("feedData===",feedData);
 }  
 
-server.listen(8080, function () {
+server.listen(3000, function () {
   console.log('Listening on http://0.0.0.0:8080');
 });
 
