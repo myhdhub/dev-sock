@@ -56,16 +56,25 @@ function sendAll (message) {
     let parseMessage = JSON.parse(message);
   console.log("send all msg--",parseMessage);
   if(parseMessage.responseType == 4) {
-    let check = feedData.find((item) => item.data.MatchId == parseMessage.data.MatchId);
+    let check = feedData['responseType4'].find((item) => item.data.MatchId == parseMessage.data.MatchId);
     if(!check) {
-      feedData.push(parseMessage); 
+      feedData['responseType4'].push(parseMessage); 
     }
     let indexToUpdate = feedData.findIndex((item) => item.data.MatchId == parseMessage.data.MatchId);
-    feedData[indexToUpdate] = parseMessage; 
+    feedData['responseType4'][indexToUpdate] = parseMessage; 
+  }
+
+  if(parseMessage.responseType == 14) {
+    let check = feedData['responseType14'].find((item) => item.data.MatchId == parseMessage.data.MatchId && item.data.RateType == parseMessage.data.RateType);
+    if(!check) {
+      feedData['responseType14'].push(parseMessage); 
+    }
+    let indexToUpdate = feedData.findIndex((item) => item.data.MatchId == parseMessage.data.MatchId && item.data.RateType == parseMessage.data.RateType);
+    feedData['responseType14'][indexToUpdate] = parseMessage; 
   }
 
     for (var i=0; i<CLIENTS.length; i++) {
-        CLIENTS[i].send(message);
+        CLIENTS[i].send(feedData);
     }
     console.log("feedData===",feedData);
 }  
