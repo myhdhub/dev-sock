@@ -51,16 +51,17 @@ wss.on('connection', function connection(ws) {
   });
 
 
-function sendAll (message) {
-
-  console.log("send all msg--",message);
-  if(message.responseType == 4) {
-    let check = feedData.find((item) => item.data.MatchId == message.data.MatchId);
+function sendAll () {
+    
+    let parseMessage = JSON.parse(message);
+  console.log("send all msg--",parseMessage);
+  if(parseMessage.responseType == 4) {
+    let check = feedData.find((item) => item.data.MatchId == parseMessage.data.MatchId);
     if(!check) {
-      feedData.push(message); 
+      feedData.push(parseMessage); 
     }
-    let indexToUpdate = feedData.findIndex((item) => item.data.MatchId == message.data.MatchId);
-    feedData[indexToUpdate] = message; 
+    let indexToUpdate = feedData.findIndex((item) => item.data.MatchId == parseMessage.data.MatchId);
+    feedData[indexToUpdate] = parseMessage; 
   }
 
     for (var i=0; i<CLIENTS.length; i++) {
