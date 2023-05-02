@@ -58,17 +58,16 @@ function sendAll (message) {
     let parseMessage = JSON.parse(message);
   console.log("send all msg--",parseMessage);
   if(parseMessage.responseType == 4) {
-    let jsonParseResponseType4 = JSON.parse(feedData.responseType4);
-    let check = jsonParseResponseType4.find((item) => item.data.MatchId == parseMessage.data.MatchId);
+    let check = feedData.responseType4.find((item) => item.data.MatchId == parseMessage.data.MatchId);
     if(!check) {
-      jsonParseResponseType4.push(message); 
+      feedData.responseType4.push(parseMessage); 
     }
-    let indexToUpdate = jsonParseResponseType4.findIndex((item) => item.data.MatchId == parseMessage.data.MatchId);
-    jsonParseResponseType4[indexToUpdate] = message; 
+    let indexToUpdate = feedData.responseType4.findIndex((item) => item.data.MatchId == parseMessage.data.MatchId);
+    feedData.responseType4[indexToUpdate] = parseMessage; 
   }
 
     for (var i=0; i<CLIENTS.length; i++) {
-        CLIENTS[i].send(feedData);
+        CLIENTS[i].send(JSON.stringify(message));
     }
     console.log("feedData===",feedData);
 }  
