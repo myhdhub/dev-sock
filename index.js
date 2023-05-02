@@ -16,7 +16,14 @@ const wss = new WebSocket.Server({ server });
 // const wssMySock = new WebSocket('wss://localhost:3000');
   //wssMySock.binaryType = "arraybuffer"; 
 
-var feedData = [];
+var feedData = [
+  {
+    'responseType4' : []
+  },
+  {
+    'responseType14' : []
+  },
+];
 
 var CLIENTS=[];
 
