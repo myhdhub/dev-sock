@@ -51,18 +51,18 @@ wss.on('connection', function connection(ws) {
   });
 
 
-function sendAll () {
+function sendAll (message) {
     
     let parseMessage = JSON.parse(message);
   console.log("send all msg--",parseMessage);
-  // if(parseMessage.responseType == 4) {
-  //   let check = feedData.find((item) => item.data.MatchId == parseMessage.data.MatchId);
-  //   if(!check) {
-  //     feedData.push(parseMessage); 
-  //   }
-  //   let indexToUpdate = feedData.findIndex((item) => item.data.MatchId == parseMessage.data.MatchId);
-  //   feedData[indexToUpdate] = parseMessage; 
-  // }
+  if(parseMessage.responseType == 4) {
+    let check = feedData.find((item) => item.data.MatchId == parseMessage.data.MatchId);
+    if(!check) {
+      feedData.push(parseMessage); 
+    }
+    let indexToUpdate = feedData.findIndex((item) => item.data.MatchId == parseMessage.data.MatchId);
+    feedData[indexToUpdate] = parseMessage; 
+  }
 
     for (var i=0; i<CLIENTS.length; i++) {
         CLIENTS[i].send(message);
