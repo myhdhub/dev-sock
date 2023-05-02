@@ -97,7 +97,7 @@ const connect = (endpoint,isReload) => {
 
       console.log("main--msg-",event.data);
       
-        feedData.push(event.data);
+        // feedData.push(event.data);
 
         sendAll(event.data);  
             
