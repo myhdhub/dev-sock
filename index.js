@@ -55,14 +55,14 @@ function sendAll (message) {
     
     let parseMessage = JSON.parse(message);
   console.log("send all msg--",parseMessage);
-  // if(parseMessage.responseType == 4) {
-  //   let check = feedData.find((item) => item.data.MatchId == parseMessage.data.MatchId);
-  //   if(!check) {
-  //     feedData.push(parseMessage); 
-  //   }
-  //   let indexToUpdate = feedData.findIndex((item) => item.data.MatchId == parseMessage.data.MatchId);
-  //   feedData[indexToUpdate] = parseMessage; 
-  // }
+  if(parseMessage.responseType == 4) {
+    let check = feedData['responseType4'].find((item) => item.data.MatchId == parseMessage.data.MatchId);
+    if(!check) {
+      feedData['responseType4'].push(parseMessage); 
+    }
+    let indexToUpdate = feedData['responseType4'].findIndex((item) => item.data.MatchId == parseMessage.data.MatchId);
+    feedData['responseType4'][indexToUpdate] = parseMessage; 
+  }
 
     for (var i=0; i<CLIENTS.length; i++) {
         CLIENTS[i].send(message);
