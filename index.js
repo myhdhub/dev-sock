@@ -45,9 +45,9 @@ wss.on('connection', function connection(ws) {
       wss.clients.forEach(function each(client) {
         if(client.id == ws.id) {
             if(feedData.length > 0){
-            feedData.forEach(message => {
-              client.send(message);
-            });
+            // feedData.forEach(message => {
+              client.send(feedData);
+            // });
           }
         }
        });
