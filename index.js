@@ -44,14 +44,14 @@ wss.on('connection', function connection(ws) {
 
       wss.clients.forEach(function each(client) {
         if(client.id == ws.id) {
-          console.log("aaaaa",feedData);
+          // console.log("aaaaa",feedData);
 
-            if(feedData.length > 0){
-              console.log("bbbbbb",feedData);
+            // if(feedData.length > 0){
+              // console.log("bbbbbb",feedData);
             // feedData.forEach(message => {
-              client.send(feedData);
+              client.send(JSON.stringify(feedData));
             // });
-          }
+          // }
         }
        });
 
@@ -141,7 +141,7 @@ const connect = (endpoint,isReload) => {
 
     client.onmessage = (event) => {
 
-      console.log("main--msg-",event.data);
+      // console.log("main--msg-",event.data);
       
         // feedData.push(event.data);
 
