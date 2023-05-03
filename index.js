@@ -60,7 +60,7 @@ wss.on('connection', function connection(ws) {
 function sendAll (message) {
     
     let parseMessage = JSON.parse(message);
-    console.log("send all msg--",parseMessage);
+    // console.log("send all msg--",parseMessage);
   if(parseMessage.responseType == 4) {
     let check = feedData.responseType4.find((item) => item.data.MatchId == parseMessage.data.MatchId);
     if(!check) {
